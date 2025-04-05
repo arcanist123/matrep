@@ -1,0 +1,16 @@
+# Binaries
+*.exe
+*.o
+*.out
+
+# Dependencies (Go modules)
+/vendor
+go.sum
+
+# IDE specific files
+.vscode/
+.idea/
+
+# Temporary files
+*~
+# Other temporary files you might have
