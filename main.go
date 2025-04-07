@@ -7,20 +7,20 @@ import (
 
 func main() {
 	// Define flags
-	fileNamePtr := flag.String("file", "", "file to parse as a matrix")
+	fileNamePtr := flag.String("file", "data.csv", "file to parse as a matrix")
+	configFilePtr := flag.String("config", "config.yaml", "file with configuration")
 
 	// Parse the flags from the command line
 	flag.Parse()
 
 	// Access the values of the flags
 	fileName := *fileNamePtr
-
+	configFile := *configFilePtr
 	fmt.Printf("Name: %s\n", fileName)
-	if fileName != "" {
+	fmt.Printf("Config: %s\n", configFile)
+	if fileName == "" || configFile == "" {
 
+		fmt.Printf("cannot proceed with processing")
 	}
 
-	// Accessing non-flag arguments (after the flags)
-	fmt.Println("Non-flag arguments:", flag.Args())
-	fmt.Println("Number of non-flag arguments:", flag.NArg())
 }
