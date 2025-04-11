@@ -1,8 +1,6 @@
-configs:
-  -config1:
-    type: "file"
-    systems: systems.csv
-  -config2:
-    type: "db"
-    environment: .env
-    systems: ZSYSTEMS
+- name: "config1"
+  configType: "file"
+  systems: systems.csv
+- name: "config2"
+  configType: "db"
+  systems: ZSYSTEMS

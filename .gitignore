@@ -13,7 +13,7 @@ go.sum
 .idea/
 
 #passwords
-.env
+*.env
 # Temporary files
 *~
 # Other temporary files you might have

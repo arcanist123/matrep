@@ -7,18 +7,14 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-type Config struct {
-	Server struct {
-		Host string `yaml:"host"`
-		Port int    `yaml:"port"`
-	} `yaml:"server"`
-	Database struct {
-		Username string `yaml:"username"`
-		Password string `yaml:"password"`
-	} `yaml:"database"`
+type ConfigFactory struct {
+	configName string
 }
 
-func (me Config) GetConfig() (result string, err error) {
+func NewConfigFactory(configName string) ConfigFactory {
+	return ConfigFactory{configName: configName}
+}
+func (me ConfigFactory) GetConfig() (result Config, err error) {
 
 	yamlFile, err := os.ReadFile("config.yaml")
 	if err != nil {
@@ -26,12 +22,12 @@ func (me Config) GetConfig() (result string, err error) {
 		return
 	}
 
-	var config Config
-	err = yaml.Unmarshal(yamlFile, &config)
+	var configs []Config
+	err = yaml.Unmarshal(yamlFile, &configs)
 	if err != nil {
 		fmt.Println("Error unmarshalling YAML:", err)
 		return
 	}
 
-	return "", nil
+	return Config{}, nil
 }

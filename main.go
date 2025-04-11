@@ -6,23 +6,25 @@ import (
 )
 
 func main() {
+	test_yaml()
 	// Define flags
 	fileNamePtr := flag.String("file", "data.csv", "file to parse as a matrix")
-	configFilePtr := flag.String("config_name", "config1", "name of configuration")
+	configNamePtr := flag.String("config_name", "config1", "name of configuration")
 
 	// Parse the flags from the command line
 	flag.Parse()
 
 	// Access the values of the flags
 	fileName := *fileNamePtr
-	configFile := *configFilePtr
+	configName := *configNamePtr
 	fmt.Printf("Name: %s\n", fileName)
-	fmt.Printf("Config: %s\n", configFile)
-	if fileName == "" || configFile == "" {
+	fmt.Printf("Config: %s\n", configName)
+	if fileName == "" || configName == "" {
 		fmt.Printf("cannot proceed with processing")
 
 	} else {
-		// var config =
+		var aaa, err = NewConfigFactory(configName).GetConfig()
+		println(aaa)
 	}
 
 }
