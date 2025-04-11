@@ -1,0 +1,6 @@
+- name: "config1"
+  configType: "file"
+  systems: systems.csv
+- name: "config2"
+  configType: "db"
+  systems: ZSYSTEMS
