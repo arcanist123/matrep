@@ -4,41 +4,31 @@ import (
 	"fmt"
 	"log"
 
-	"gopkg.in/yaml.v3" // Using the recommended v3 version
+	"gopkg.in/yaml.v3"
 )
 
-// Define a sample structure
-type Person struct {
-	Name    string   `yaml:"name"`
-	Age     int      `yaml:"age"`
-	Hobbies []string `yaml:"hobbies,omitempty"` // omitempty will skip if the slice is empty
+type Config1 struct {
+	Name       string `yaml:"name"`
+	ConfigType string `yaml:"configType"`
+	Systems    string `yaml:"systems"`
 }
 
-func test_yaml() {
-	// Create a slice of Person structures
-	people := []Person{
-		{
-			Name:    "Alice",
-			Age:     30,
-			Hobbies: []string{"Reading", "Hiking"},
-		},
-		{
-			Name: "Bob",
-			Age:  25,
-		},
-		{
-			Name:    "Charlie",
-			Age:     35,
-			Hobbies: []string{"Coding", "Gaming", "Music"},
-		},
-	}
+func test() {
+	yamlData := `
+- name: "config1"
+  configType: "file"
+  systems: systems.csv
+- name: "config2"
+  configType: "db"
+  systems: ZSYSTEMS
+`
 
-	// Convert the slice of structures to YAML
-	yamlData, err := yaml.Marshal(&people)
+	var configs []Config1
+
+	err := yaml.Unmarshal([]byte(yamlData), &configs)
 	if err != nil {
-		log.Fatalf("Error marshaling YAML: %v", err)
+		log.Fatalf("error: %v", err)
 	}
 
-	// Print the YAML output
-	fmt.Println(string(yamlData))
+	fmt.Printf("%+v\n", configs)
 }

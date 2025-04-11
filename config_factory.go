@@ -22,11 +22,18 @@ func (me ConfigFactory) GetConfig() (result Config, err error) {
 		return
 	}
 
+	fmt.Println(string(yamlFile))
 	var configs []Config
 	err = yaml.Unmarshal(yamlFile, &configs)
 	if err != nil {
 		fmt.Println("Error unmarshalling YAML:", err)
 		return
+	}
+
+	for _, config := range configs {
+		if config.name == me.configName {
+			return config, nil
+		}
 	}
 
 	return Config{}, nil

@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	test_yaml()
+	// test()
 	// Define flags
 	fileNamePtr := flag.String("file", "data.csv", "file to parse as a matrix")
 	configNamePtr := flag.String("config_name", "config1", "name of configuration")
