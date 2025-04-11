@@ -23,8 +23,11 @@ func main() {
 		fmt.Printf("cannot proceed with processing")
 
 	} else {
-		// var aaa, err = NewConfigFactory(configName).GetConfig()
-		// println(aaa)
+		aaa, err := NewConfigFactory(configName).GetConfig()
+		if err != nil {
+			fmt.Println("config initialisation failed")
+		}
+		fmt.Println(aaa)
 	}
 
 }
