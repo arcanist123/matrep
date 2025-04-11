@@ -23,8 +23,8 @@ func main() {
 		fmt.Printf("cannot proceed with processing")
 
 	} else {
-		var aaa, err = NewConfigFactory(configName).GetConfig()
-		println(aaa)
+		// var aaa, err = NewConfigFactory(configName).GetConfig()
+		// println(aaa)
 	}
 
 }
