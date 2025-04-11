@@ -3,6 +3,7 @@
 *.o
 *.out
 
+
 # Dependencies (Go modules)
 /vendor
 go.sum
@@ -11,6 +12,8 @@ go.sum
 .vscode/
 .idea/
 
+#passwords
+.env
 # Temporary files
 *~
 # Other temporary files you might have

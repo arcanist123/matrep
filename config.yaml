@@ -1,0 +1,8 @@
+configs:
+  -config1:
+    type: "file"
+    systems: systems.csv
+  -config2:
+    type: "db"
+    environment: .env
+    systems: ZSYSTEMS

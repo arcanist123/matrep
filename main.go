@@ -8,7 +8,7 @@ import (
 func main() {
 	// Define flags
 	fileNamePtr := flag.String("file", "data.csv", "file to parse as a matrix")
-	configFilePtr := flag.String("config", "config.yaml", "file with configuration")
+	configFilePtr := flag.String("config_name", "config1", "name of configuration")
 
 	// Parse the flags from the command line
 	flag.Parse()
@@ -19,8 +19,10 @@ func main() {
 	fmt.Printf("Name: %s\n", fileName)
 	fmt.Printf("Config: %s\n", configFile)
 	if fileName == "" || configFile == "" {
-
 		fmt.Printf("cannot proceed with processing")
+
+	} else {
+		// var config =
 	}
 
 }

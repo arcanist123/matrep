@@ -2,14 +2,10 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
 
 	"gopkg.in/yaml.v3"
 )
-
-type Config struct {
-	fileName string
-}
 
 type Config struct {
 	Server struct {
@@ -22,13 +18,9 @@ type Config struct {
 	} `yaml:"database"`
 }
 
-func NewConfig(fileName string) Config {
-	return Config{fileName: fileName}
-}
+func (me Config) GetConfig() (result string, err error) {
 
-func (this Config) GetConfig() (result string, err error) {
-
-	yamlFile, err := ioutil.ReadFile("config.yaml")
+	yamlFile, err := os.ReadFile("config.yaml")
 	if err != nil {
 		fmt.Println("Error reading YAML file:", err)
 		return
@@ -41,9 +33,5 @@ func (this Config) GetConfig() (result string, err error) {
 		return
 	}
 
-	fmt.Printf("Server Host: %s\n", config.Server.Host)
-	fmt.Printf("Server Port: %d\n", config.Server.Port)
-	fmt.Printf("Database Username: %s\n", config.Database.Username)
-	fmt.Printf("Database Password: %s\n", config.Database.Password)
-
+	return "", nil
 }
