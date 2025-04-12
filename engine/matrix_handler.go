@@ -1,13 +1,18 @@
 package engine
 
-type RequestData struct {
+import (
+	"github.com/arcanist123/matrep/config"
+)
+
+type MatrixHandler struct {
 	matrix [][]string
+	config config.Config
 }
 
-func NewRequestData(matrix [][]string) RequestData {
-	return RequestData{matrix: matrix}
+func NewMatrixHandler(matrix [][]string, config config.Config) *MatrixHandler {
+	return &MatrixHandler{matrix: matrix, config: config}
 }
 
-func (this RequestData) getReportDef() int {
-	return 0
+func (me MatrixHandler) GetReportWithData() (matrix [][]string, err error) {
+	return me.matrix, nil
 }

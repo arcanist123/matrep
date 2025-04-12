@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	config2 "github.com/arcanist123/matrep/config"
 )
 
 func main() {
@@ -23,11 +24,11 @@ func main() {
 		fmt.Printf("cannot proceed with processing")
 
 	} else {
-		aaa, err := NewConfigFactory(configName).GetConfig()
+		config, err := config2.NewConfigFactory(configName).GetConfig()
 		if err != nil {
 			fmt.Println("config initialisation failed")
 		}
-		fmt.Println(aaa)
+
 	}
 
 }
