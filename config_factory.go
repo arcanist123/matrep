@@ -1,7 +1,9 @@
 package main
 
 import (
+	"errors"
 	"fmt"
+	"log"
 	"os"
 
 	"gopkg.in/yaml.v3"
@@ -22,19 +24,58 @@ func (me ConfigFactory) GetConfig() (result Config, err error) {
 		return
 	}
 
-	fmt.Println(string(yamlFile))
-	var configs []Config
-	err = yaml.Unmarshal(yamlFile, &configs)
+	var data any
+	err = yaml.Unmarshal(yamlFile, &data)
 	if err != nil {
-		fmt.Println("Error unmarshalling YAML:", err)
-		return
+		log.Fatalf("Error unmarshalling YAML: %v", err)
+	}
+	switch v := data.(type) {
+	case []any:
+		for _, item := range v {
+			if configMap, ok := item.(map[string]any); ok { // Type assertion here
+				result, err = me._parseConfig(configMap)
+				if err == nil {
+					return result, nil
+				}
+			} else {
+				return Config{}, errors.New("unexpected structure of yaml file")
+			}
+		}
+	default:
+		return Config{}, errors.New("unexpected structure of yaml file")
 	}
 
-	for _, config := range configs {
-		if config.name == me.configName {
-			return config, nil
+	return Config{}, errors.New("requested config was not found")
+}
+
+func (me ConfigFactory) _parseConfig(configMap map[string]any) (result Config, err error) {
+	result = Config{}
+	for key, value := range configMap {
+		switch key {
+		case "name":
+			if name, ok := value.(string); ok {
+				result.name = name
+			} else {
+				return Config{}, fmt.Errorf("expected string for key 'name', got %T", value)
+			}
+		case "configType":
+			if file, ok := value.(string); ok {
+				result.configType = file
+			} else {
+				return Config{}, fmt.Errorf("expected string for key 'file', got %T", value)
+			}
+		case "systems":
+			if systems, ok := value.(string); ok {
+				result.systems = systems
+			} else {
+				return Config{}, fmt.Errorf("expected string for key 'file', got %T", value)
+			}
 		}
 	}
 
-	return Config{}, nil
+	if result.name != me.configName {
+		return Config{}, fmt.Errorf("this is not the requested config")
+	} else {
+		return result, nil
+	}
 }
