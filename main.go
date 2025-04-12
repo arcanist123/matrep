@@ -3,7 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
-	config2 "github.com/arcanist123/matrep/config"
+
+	"github.com/arcanist123/matrep/config"
 	"github.com/arcanist123/matrep/engine"
 )
 
@@ -23,7 +24,7 @@ func main() {
 		fmt.Printf("cannot proceed with processing")
 
 	} else {
-		config, err := config2.NewConfigFactory(configName).GetConfig()
+		config, err := config.NewConfigFactory(configName).GetConfig()
 		if err != nil {
 			fmt.Printf("error loading config: %s\n", err)
 		}

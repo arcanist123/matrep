@@ -18,7 +18,7 @@ func NewConfigFactory(configName string) ConfigFactory {
 }
 func (me ConfigFactory) GetConfig() (result Config, err error) {
 
-	yamlFile, err := os.ReadFile("config.yaml")
+	yamlFile, err := os.ReadFile("resources\\config.yaml")
 	if err != nil {
 		fmt.Println("Error reading YAML file:", err)
 		return
