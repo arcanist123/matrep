@@ -9,7 +9,7 @@ import (
 	"github.com/SAP/go-hdb/driver" // Import the driver (side effect registers it)
 )
 
-func main1() {
+func DbConnect() {
 	const numRow = 1000 // Number of rows to be inserted into table.
 
 	// Replace with your actual SAP HANA connection details
