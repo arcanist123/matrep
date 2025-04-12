@@ -7,31 +7,28 @@ import (
 )
 
 type FileReader struct {
-	fileName string
+	filePath string
 }
 
-func NewFileReader(fileName string) FileReader {
-	return FileReader{fileName: fileName}
+func NewFileReader(filePath string) *FileReader {
+	return &FileReader{filePath: filePath}
 }
-func (this FileReader) getMatrix() [][]string {
-
-	file, err := os.Open(this.fileName)
+func (me FileReader) readCSVToMatrix() ([][]string, error) {
+	// Open the CSV file
+	file, err := os.Open(me.filePath)
 	if err != nil {
-		fmt.Println("Error opening CSV file:", err)
-		return nil
+		return nil, fmt.Errorf("error opening file: %w", err)
 	}
 	defer file.Close()
 
+	// Create a new CSV reader
 	reader := csv.NewReader(file)
 
-	fmt.Println("CSV content:")
-	for {
-		record, err := reader.Read()
-		if err != nil {
-			fmt.Println("Error reading record:", err)
-			break // Exit on error or EOF
-		}
-		fmt.Println(record) // Each 'record' is a slice of strings representing a row
+	// Read all records from the CSV file
+	records, err := reader.ReadAll()
+	if err != nil {
+		return nil, fmt.Errorf("error reading CSV: %w", err)
 	}
-	return nil
+
+	return records, nil
 }
