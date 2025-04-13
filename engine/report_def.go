@@ -67,7 +67,7 @@ func (me Report_def) normaliseCellContents(matrix [][]string) (result [][]string
 func (me Report_def) get_page(matrix [][]string) (result report_page, err error) {
 
 	for rowIndex, row := range matrix {
-		if me.isRowEmpty(row) != true {
+		if me.isRowEmpty(row) {
 			report_values, is_resolved := me.resolve_row_to_page(row)
 			if is_resolved {
 				return report_page{
